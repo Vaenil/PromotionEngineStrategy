@@ -1,4 +1,4 @@
-﻿namespace PromotionEngineStrategy
+namespace PromotionEngineStrategy
 {
     public class ActivePromotion
     {
@@ -68,12 +68,16 @@
        
         //Get order from user
         public void GetOrderFromUser(char id, int count)
-        {
-            //while (ordercount > 0)
+        {            
+            //if (id != ' ')
+            if(char.IsLetter(id))
             {
                 listItems.Add(id, count);
                 //ordercount--;
             }
+            else
+                Console.WriteLine(" Please enter Alphabets only!");
+
         }
 
         //Display the customer order
@@ -127,56 +131,22 @@
             //=======================================ACTIVE PROMOTIONS===================================//
             //Apply Fixed price combination for A and B
             Console.WriteLine("Activating fixed price Promotion");
-            context.SetPromotionStrategy(new FixedPromotionType());
+            context.SetPromotionStrategy(new FixedPromotionTypeAB());
             customerList.listItems =context.ApplyPromotion(customerList.listItems, customerList.priceInOrder);
 
             //Apply Combo price combination for C and D
             Console.WriteLine("Activating combo price Promotion");
-            context.SetPromotionStrategy(new ComboPromotionType());
+            context.SetPromotionStrategy(new ComboPromotionTypeCD());
             customerList.listItems = context.ApplyPromotion(customerList.listItems, customerList.priceInOrder);
 
-            //Calculate price for missed out products
-            Console.WriteLine("Activating unit price Promotion");
-            context.SetPromotionStrategy(new ComboPromotionType());
-            customerList.listItems = context.ApplyPromotion(customerList.listItems, customerList.priceInOrder);
+            ////Calculate price for missed out products
+            //Console.WriteLine("Activating unit price Promotion");
+            //context.SetPromotionStrategy(new PercentagePromotionType());
+            //customerList.listItems = context.ApplyPromotion(customerList.listItems, customerList.priceInOrder);
 
+            Console.WriteLine("======== Happy Shopping ! ============");
 
-            int read = Convert.ToInt32(Console.ReadLine());
         }
     }
-
-    /// <summary>
-    /// Strategy to calculate discounts
-    /// </summary>
-    //public abstract class PromotionStrategy
-    //{
-    //    public abstract object DiscountCalculation(object o, int x);
-    //}
-
-
-    ///// <summary>
-    ///// Context to choose the strategy to use
-    ///// </summary>
-    //public class Context
-    //{
-    //    private PromotionStrategy _promotionStrategy;
-
-    //    //User has to access context class to choose the appropriate promotion class
-    //    public Context() { }
-
-    //    //Set the promotion strategy at run time
-    //    public void SetPromotionStrategy(PromotionStrategy ps)
-    //    {
-    //        _promotionStrategy = ps;            
-    //    }
-
-    //    //Get user input and call apply it to 
-    //    public void ApplyPromotion(object o, int x)
-    //    {
-    //        _promotionStrategy.DiscountCalculation(o, x);
-    //    }
-
-    //}
-
 
 }//end namespace
