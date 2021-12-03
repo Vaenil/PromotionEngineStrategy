@@ -1,13 +1,6 @@
 namespace PromotionEngineStrategy
 {
-    public class ActivePromotion
-    {
-        public static void Main()
-        {
-            //Call the required Strategy to activate promotion
-        }
-    }
-
+   
     ///<summary>
     /// Product Items and its unit price
     ///</summary>
